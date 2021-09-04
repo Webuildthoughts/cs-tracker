@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+const {mongoose,Schema,ObjectId}=require('./utils/ShemaUtils')
 
-const questionSchema = mongoose.Schema({
+const questionSchema = Schema({
   name: {
     type: String,
     required: true,
@@ -9,24 +9,12 @@ const questionSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  isCompleted: {
-    type: true,
-    default: false,
-    required: true,
-  },
-  completionDate: {
-    type: Date,
-    required: true,
-  },
-  revisionDate: {
-    type: Date,
-  },
   subjectTopics: {
-    type: Schema.Types.ObjectId,
+    type:ObjectId,
     ref: 'SubjectTopics',
   },
   profile: {
-    type: [Schema.Types.ObjectId],
+    type: [ObjectId],
     ref: 'UserProfile',
   },
 })

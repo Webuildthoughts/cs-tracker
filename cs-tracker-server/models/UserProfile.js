@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+const {mongoose,Schema}=require('./utils/ShemaUtils')
 
-const userProfileSchema = mongoose.Schema({
+const userProfileSchema = Schema({
   name: {
     type: String,
     required: true,

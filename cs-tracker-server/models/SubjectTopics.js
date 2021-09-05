@@ -19,4 +19,5 @@ const subjectTopicsSchema = Schema({
   },
 })
 
-module.exports = mongoose.model('SubjectTopics', subjectTopicsSchema)
+const SubjectTopicsModel=  mongoose.model('SubjectTopics', subjectTopicsSchema)
+module.exports =SubjectTopicsModel

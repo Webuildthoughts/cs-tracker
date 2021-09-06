@@ -66,8 +66,8 @@ router.get("/:subjectTopicId/all",(req,res)=>{
 
 
 /**
- * GET REQUEST TO GET QUESTIONS LIST FOR GIVEN SUBJECT TOPIC
- * END POINT:"localhost:5000/api/question/:subjectTopicId/all"
+ * GET REQUEST TO GET QUESTIONS LIST FOR GIVEN SUBJECT TOPIC & DIFFICULTY
+ * END POINT:"localhost:5000/api/question/:subjectTopicId/difficulty/all"
  */
  router.get("/:subjectTopicId/:diffLevel/all",(req,res)=>{
 

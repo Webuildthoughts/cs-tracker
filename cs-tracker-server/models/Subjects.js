@@ -7,7 +7,7 @@ const subjectSchema = Schema({
   },
   description: {
     type: String,
-    required: true,
+    required: true
   },
   topicsCount: {
     type: Number,

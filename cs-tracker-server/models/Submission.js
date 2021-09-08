@@ -4,13 +4,14 @@ const questionSchema = Schema({
 question: {    
     type:ObjectId,
     ref: 'Questions',
+
 },
 submitedBy:{
     type:ObjectId,
     ref: 'UserProfile'
 },
 isCompleted: {
-    type: true,
+    type:Boolean,
     default: false,
     required: true,
    },
@@ -27,4 +28,6 @@ difficulty: {
 }
 })
 
-module.exports = mongoose.model('Submissions', questionSchema)
+const SubmissionModel=mongoose.model('Submissions', questionSchema)
+
+module.exports = SubmissionModel

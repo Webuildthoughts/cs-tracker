@@ -15,6 +15,12 @@ const userProfileSchema = Schema({
   institution: {
     type: String,
   },
+  token:{
+    type:String,
+    require:true
+  }
 })
 
-module.exports = mongoose.model('UserProfile', userProfileSchema)
+const UserProfileModel=mongoose.model('UserProfile', userProfileSchema)
+
+module.exports =UserProfileModel

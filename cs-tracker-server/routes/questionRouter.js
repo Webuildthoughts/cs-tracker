@@ -10,29 +10,31 @@ const router = express.Router()
  * REQUIRE REQUEST BODY IN JSON
  * END POINT:"localhost:5000/api/question/create"
  */
-router.post("/create",(req,res)=>{
+
+
+
+router.post("/create",async (req,res)=>{
 
     const body=req.body
 
 
-    QuestionModel.create(body,(err,result)=>{
+ 
 
-        if(err)
-        {
-            res.status(400).json({
-                status:"Error",
-                message:err._message
-            })
-        }
-        else
-        {
-            res.status(200).json({
-                status:"Success",
-                message:"Question created succesfully",
-                data:result
-            })
-        }
-    })
+   try{
+        const result= await QuestionModel.create(body)
+        res.status(200).json({
+        status:"Success",
+        message:"Question created succesfully",
+        data:result})
+   }
+   catch(err)
+   {
+       res.status(400).json({
+        status:"Error",
+        message:err._message})
+
+   }
+
 })
 
 
@@ -41,28 +43,28 @@ router.post("/create",(req,res)=>{
  * GET REQUEST TO GET QUESTIONS LIST FOR GIVEN SUBJECT TOPIC
  * END POINT:"localhost:5000/api/question/:subjectTopicId/all"
  */
-router.get("/:subjectTopicId/all",(req,res)=>{
+router.get("/:subjectTopicId/all",async (req,res)=>{
 
     const subjectTopicId=req.params.subjectTopicId
 
-    QuestionModel.find({ subjectTopics:subjectTopicId},(err,result)=>{
-
-        if(err)
-        {
-            res.status(400).json({
-                status:"Error",
-                message:err
-            })
-        }
-        else
-        {
-            res.status(200).json({
+    try
+    {
+        const result=await     QuestionModel.find({ subjectTopics:subjectTopicId}).select({__v:0,subjectTopics:0,profile:0})
+         res.status(200).json({
                 status:"Success",
                 message:"Result fetched successfully",
                 data:result
             })
-        }
-    }).select({__v:0,subjectTopics:0,profile:0})
+
+    }
+    catch(err)
+    {
+        res.status(400).json({
+            status:"Error",
+            message:err
+        })
+
+    }
 })
 
 
@@ -70,57 +72,62 @@ router.get("/:subjectTopicId/all",(req,res)=>{
  * GET REQUEST TO GET QUESTIONS LIST FOR GIVEN SUBJECT TOPIC & DIFFICULTY
  * END POINT:"localhost:5000/api/question/:subjectTopicId/difficulty/all"
  */
- router.get("/:subjectTopicId/:diffLevel/all",(req,res)=>{
+ router.get("/:subjectTopicId/:diffLevel/all",async (req,res)=>{
 
     const subjectTopicId=req.params.subjectTopicId
     const diffLevel=req.params.diffLevel
-    QuestionModel.find({ subjectTopics:subjectTopicId,difficulty:diffLevel},(err,result)=>{
 
-        if(err)
-        {
-            res.status(400).json({
-                status:"Error",
-                message:err
-            })
-        }
-        else
-        {
-            res.status(200).json({
-                status:"Success",
-                message:"Result fetched successfully",
-                data:result
-            })
-        }
-    }).select({__v:0,subjectTopics:0,profile:0})
-})
+    try
+    {
+        const result=await  QuestionModel.find({ subjectTopics:subjectTopicId,difficulty:diffLevel}).select({__v:0,subjectTopics:0,profile:0})
+
+        res.status(200).json({
+            status:"Success",
+            message:"Result fetched successfully",
+            data:result
+        })
+    }
+    catch(err)
+    {
+        
+        res.status(400).json({
+            status:"Error",
+            message:err
+        })
+
+    }
+ })
 
 
 /**
  * GET REQUEST TO GET QUESTIONS LIST DONE BY PARTICULAR USER 
  * END POINT:"localhost:5000/api/question/user/uid/all"
- * YET TO IMPLEMENTED
+ * YET TO TESTED 
  */
- router.get("/user/:uid/all",(req,res)=>{
+
+ router.get("/user/:uid/all",async (req,res)=>{
 
     const uid=req.params.uid
-    QuestionModel.find({ profile:{$in:uid}},(err,result)=>{
 
-        if(err)
-        {
-            res.status(400).json({
-                status:"Error",
-                message:err
-            })
-        }
-        else
-        {
-            res.status(200).json({
-                status:"Success",
-                message:"Result fetched successfully",
-                data:result
-            })
-        }
-    }).select({__v:0,subjectTopics:0,profile:0})
+    try
+    {
+        const result=await QuestionModel.find({ profile:{$in:uid}}).select({__v:0,subjectTopics:0,profile:0})
+        
+        res.status(200).json({
+            status:"Success",
+            message:"Result fetched successfully",
+            data:result
+        })
+
+    }
+    catch(err)
+    {
+        res.status(400).json({
+            status:"Error",
+            message:err
+        })
+
+    }
 })
 
 

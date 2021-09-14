@@ -10,29 +10,26 @@ const router = express.Router()
  * REQUIRE REQUEST BODY IN JSON
  * END POINT:"localhost:5000/api/subject/topic/create"
  */
-router.post("/create",(req,res)=>{
+router.post("/create",async (req,res)=>{
 
     const body=req.body
-
-
-    SubjectTopicsModel.create(body,(err,result)=>{
-
-        if(err)
-        {
-            res.status(400).json({
-                status:"Error",
-                message:err._message
-            })
-        }
-        else
-        {
-            res.status(200).json({
-                status:"Success",
-                message:"SubjectTopic created succesfully",
-                data:result
-            })
-        }
-    })
+    
+    try{
+        const result= SubjectTopicsModel.create(body)
+        
+        res.status(200).json({
+        status:"Success",
+        message:"SubjectTopic created succesfully",
+        data:result})
+    }    
+    catch(err)
+    {
+        res.status(400).json({
+        status:"Error",
+        message:err._message})
+    }
+ 
+  
 })
 
 
@@ -41,28 +38,28 @@ router.post("/create",(req,res)=>{
  * GET REQUEST TO GET TOPICS LIST FOR GIVEN SUBJECT
  * END POINT:"localhost:5000/api/subject/topic/:subjectId/all"
  */
-router.get("/:subjectId/all",(req,res)=>{
+router.get("/:subjectId/all",async (req,res)=>{
 
     const subjectId=req.params.subjectId
 
-    SubjectTopicsModel.find({subject:subjectId},(err,result)=>{
+    try
+    {
+        const result=await SubjectTopicsModel.find({subject:subjectId})
+        res.status(200).json({
+            status:"Success",
+            message:"Result fetched successfully",
+            data:result
+        })
 
-        if(err)
-        {
-            res.status(400).json({
-                status:"Error",
-                message:err
-            })
-        }
-        else
-        {
-            res.status(200).json({
-                status:"Success",
-                message:"Result fetched successfully",
-                data:result
-            })
-        }
-    })
+    }
+    catch(err)
+    {
+        res.status(400).json({
+            status:"Error",
+            message:err
+        })
+
+    }
 })
 
 module.exports=router

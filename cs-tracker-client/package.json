@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.1.10",
     "bootstrap": "^5.1.0",
     "contentful": "^8.5.0",
+    "dotenv": "^10.0.0",
     "materialize-css": "^1.0.0-rc.2",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-beta.6",

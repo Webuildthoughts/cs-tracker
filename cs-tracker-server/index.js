@@ -1,5 +1,6 @@
 const express=require('express')
 const mongoose=require('mongoose')
+const cors=require('cors')
 
 const userProfileRouter=require('./routes/userProfileRouter')
 const submissionRouter=require('./routes/submissionRouter')
@@ -9,6 +10,8 @@ const questionRouter=require('./routes/questionRouter')
 
 const app = express()
 const PORT = 5000
+
+app.use(cors())
 
 
 

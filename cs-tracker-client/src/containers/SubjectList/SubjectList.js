@@ -1,37 +1,48 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import Subject from '../../components/Subject/Subject'
+import axios from 'axios'
+
 
 const SubjectList = () => {
-  const subjectData = [
-    {
-      id: 1,
-      name: 'Data Structures and Algorithms',
-      description: 'Mastering DSA like a pro',
-      topicsCount: 1,
-      imageUrl:
-        'https://blog-c7ff.kxcdn.com/blog/wp-content/uploads/2019/11/Banner-Blog-1A-1.jpg',
-    },
+
+  const [subjectData,setSubjectData]=useState([])
+
+
+  useEffect(()=>{
+    fetchSubjectList()
+  },[])
+
+
+  const fetchSubjectList=async ()=>
+  {
     
-  ]
+   try{
+    const res=await axios.get('http://localhost:5000/api/subject/all')
+      console.log("Response fetched subject list"+res.data.data);
+      setSubjectData(res.data.data)
+    }
+    catch(error) {
+      console.log("Error occured subject list"+error.message);
+    }
+  }
 
   return (
     <div>
-      {subjectData.map(
+      {subjectData && subjectData.map(
         ({
-          id,
+          _id,
           name,
           description,
-          topicsCount,
-          imageUrl,
+          topicsCount
         }) => {
           return (
             <Subject
-              key={id}
-              id={id}
+              key={_id}
+              id={_id}
               name={name}
               description={description}
               topicsCount={topicsCount}
-              imageUrl={imageUrl}
+              imageUrl='google.com'
             />
           )
         }

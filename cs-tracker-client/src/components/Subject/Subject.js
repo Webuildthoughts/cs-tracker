@@ -32,7 +32,7 @@ const Subject = ({
 
 
   const renderSubjectTopicsList = () => {
-    history.push("/dsa");
+    history.push("/dsa/"+id);
   }
 
   return (

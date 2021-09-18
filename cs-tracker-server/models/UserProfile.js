@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+const {mongoose,Schema}=require('./utils/ShemaUtils')
 
-const userProfileSchema = mongoose.Schema({
+const userProfileSchema = Schema({
   name: {
     type: String,
     required: true,
@@ -15,6 +15,12 @@ const userProfileSchema = mongoose.Schema({
   institution: {
     type: String,
   },
+  token:{
+    type:String,
+    require:true
+  }
 })
 
-module.exports = mongoose.model('UserProfile', userProfileSchema)
+const UserProfileModel=mongoose.model('UserProfile', userProfileSchema)
+
+module.exports =UserProfileModel

@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+const {mongoose,Schema,ObjectId}=require('./utils/ShemaUtils')
 
-const subjectTopicsSchema = mongoose.Schema({
+const subjectTopicsSchema = Schema({
   name: {
     type: String,
     required: true,
@@ -14,9 +14,10 @@ const subjectTopicsSchema = mongoose.Schema({
     required: true,
   },
   subject: {
-    type: Schema.Types.ObjectId,
+    type:ObjectId,
     ref: 'Subjects',
   },
 })
 
-module.exports = mongoose.model('SubjectTopics', subjectTopicsSchema)
+const SubjectTopicsModel=  mongoose.model('SubjectTopics', subjectTopicsSchema)
+module.exports =SubjectTopicsModel

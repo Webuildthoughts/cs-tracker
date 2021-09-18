@@ -10,6 +10,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+
+
 function App() {
   return (
     <>
@@ -19,7 +21,7 @@ function App() {
         <Route path="/progress" component={Progress} />
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
-        <Route path="/dsa" component={SubjectTopics} />
+        <Route path="/dsa/:id" component={SubjectTopics} />
         <Route path="/questions" component={Questions}/>
         <Route path="/currentQuestion" component={CurrentQuestion} />
       </Router>

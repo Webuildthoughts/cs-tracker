@@ -1,7 +1,36 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import SubjectTopicsComponent from '../../components/SubjectTopicsComponent/SubjectTopicsComponent'
+import axios from 'axios'
+import { useParams,useHistory } from 'react-router-dom'
+
 
 const SubjectTopicsList = () => {
+
+  let {id}=useParams()
+
+  const [subjectTopicsData,setSubjectTopicsData]=useState([])
+
+
+  useEffect(()=>{
+    console.log(id)
+    fetchSubjectTopicList()
+  },[])
+
+
+  const fetchSubjectTopicList=async ()=>
+  {
+    
+   try{
+    const res=await axios.get('http://localhost:5000/api/subject/topic/'+id+'/all')
+      console.log("Response fetched subject list"+res.data.data);
+      setSubjectTopicsData(res.data.data)
+    }
+    catch(error) {
+      console.log("Error occured subject list"+error.message);
+    }
+  }
+
+  /*
   const subjectTopicsData = [
     {
       id: 1,
@@ -76,6 +105,7 @@ const SubjectTopicsList = () => {
         'https://blog-c7ff.kxcdn.com/blog/wp-content/uploads/2019/11/Banner-Blog-1A-1.jpg',
     },
   ]
+  */
 
   return (
     <div>

@@ -8,7 +8,7 @@ const subjectTopicRouter=require('./routes/subjectTopicRouter')
 const questionRouter=require('./routes/questionRouter')
 
 const app = express()
-const PORT = 5000
+const PORT = 3000
 
 
 
